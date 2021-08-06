@@ -25,8 +25,27 @@ bool sortComparator(pll a, pll b) {
     return a.second < b.second;
 }
 
-void solve() {
-    
+stack<int> ans;
+
+void dfs(int node, vector<int> &visited, vector<int> &adj[]) {
+    visited[node] = true;
+    for (auto neighbour : adj[node]) {
+        if (!visited[neighbour]) dfs(neighbour, visited, adj);
+    }
+    ans.push(node);
+}
+
+vector<int> solve(int V, vector<int> adj[]) {
+    vector<bool> visited(V);
+    for (int i = 0; i < V; i++) {
+        if (!visited[i]) dfs(i, visited, adj);
+    }
+    vector<int> res;
+    while (!ans.empty) {
+        res.pb(ans.top());
+        ans.pop();
+    }
+    return res;
 }
 
 int main() {

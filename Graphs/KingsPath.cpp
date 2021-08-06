@@ -1,79 +1,101 @@
+// Author: Ankur Saha
+// Linkedin: https://www.linkedin.com/in/ankur-saha/
+// Github: https://github.com/Excalibur79
+
 #include <bits/stdc++.h>
-#define ll long long
 using namespace std;
 
-const ll m=1000;
+#define ll long long
+#define vi vector<int>
+#define vll vector<ll>
+#define pii pair<int, int>
+#define pll pair<ll, ll>
+#define pb push_back
+#define mp make_pair
+const int MOD = 1e9 + 7;
+const ll INF = 1e18;
+#define inputarr(arr, n) \
+    for (ll i = 0; i < n; i++) cin >> arr[i];
+#define printarr(arr, n) \
+    for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
-// vector<vector<bool>(m+1)> graph(m+1);
-// vector<vector<bool>(m+1)> visited(m+1);
+bool sortComparator(pll a, pll b) {
+    if (a.first < b.first) return true;
+    if (a.first > b.first) return false;
+    return a.second < b.second;
+}
 
-bool graph[m+1][m+1];
-bool visited[m+1][m+1];
-map<pair<ll,ll>,pair<ll,ll>> hashMap;
-ll x,y,p,q;
-bool pathPresent = false;
-ll pathLength = 0;
+pair<ll, ll> Start, End;
+map<pair<ll, ll>, ll> Hash;
+vector<pair<ll, ll>> arr;
+map<pair<ll, ll>, ll> Distance;
+map<pair<ll, ll>, ll> visited;
 
-bool isValid(ll i,ll j){
-    if(i<1 || i >m || j<1 || j>m)
-        return false;
-    if(visited[i][j]==true || graph[i][j]==false)
-        return false;
-    return true;    
-};
+bool isValid(pll node) {
+    ll index = lower_bound(arr.begin(), arr.end(), node) - arr.begin();
+    if (arr[index].first != node.first) return false;
+    if (!visited[node] && (arr[index] == node || Hash[arr[index]] == 2))
+        return true;
+    return false;
+}
 
-void calculatePathLength(){
-    ll i = p,j=q;
-    while(i!=-1 && j!=-1){
-        pathLength++;
-        i = hashMap[{i,j}].first;
-        j = hashMap[{i,j}].second;
+bool bfs() {
+    visited[Start] = true;
+    queue<pair<ll, ll>> q;
+    q.push(Start);
+    while (!q.empty()) {
+        pll node = q.front();
+        q.pop();
+        vector<pll> neighbours = {{node.first + 1, node.second},
+                                  {node.first - 1, node.second},
+                                  {node.first, node.second + 1},
+                                  {node.first, node.second - 1},
+                                  {node.first - 1, node.second - 1},
+                                  {node.first - 1, node.second + 1},
+                                  {node.first + 1, node.second + 1},
+                                  {node.first + 1, node.second - 1}};
+        for (auto neighbour : neighbours) {
+            if (isValid(neighbour)) {
+                visited[neighbour] = true;
+                Distance[neighbour] = Distance[node] + 1;
+                q.push(neighbour);
+                if (neighbour == End) return true;
+            }
+        }
     }
-};
+    return false;
+}
 
-void dfs(ll i,ll j){
-    visited[i][j] = true;
-    if(i==p && j==q){
-        pathPresent = true;
-        calculatePathLength();
+void solve() {
+    ll x0, y0, x1, y1, n;
+    cin >> x0 >> y0 >> x1 >> y1 >> n;
+    Start = {x0, y0}, End = {x1, y1};
+    while (n--) {
+        ll r, a, b;
+        cin >> r >> a >> b;
+        Hash[mp(r, a)] = 1;
+        arr.pb(mp(r, a));
+        if (mp(r, a) != mp(r, b)) {
+            Hash[mp(r, b)] = 2;
+            arr.pb(mp(r, b));
+        }
     }
-    if(isValid(i-1,j)){
-        hashMap[{i-1,j}] = {i,j};
-        dfs(i-1,j);
-    }
-    if(isValid(i+1,j)){
-        hashMap[{i+1,j}] = {i,j};
-        dfs(i+1,j);
-    }
-    if(isValid(i,j-1)){
-        hashMap[{i,j-1}] = {i,j};
-        dfs(i,j-1);
-    }
-    if(isValid(i,j+1)){
-        hashMap[{i,j+1}] = {i,j};
-        dfs(i,j+1);
-    }
-};
-
-int main()
-{
-   
-    cin>>x>>y>>p>>q;
-    ll n;
-    cin>>n;
-    while (n--){
-       ll r,a,b;
-       cin>>r>>a>>b;
-       for(ll i=a;i<=b;i++){
-           graph[r][i] = true;
-       }
-    }
-    hashMap[{x,y}] = {-1,-1};
-    dfs(x,y);
-    if(pathPresent){
-        cout<<pathLength<<endl;
-    }
+    sort(arr.begin(), arr.end());
+    bool ans = bfs();
+    if (ans)
+        cout << Distance[End] << endl;
     else
-        cout<<-1<<endl;
+        cout << -1 << endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        solve();
+    }
     return 0;
 }
