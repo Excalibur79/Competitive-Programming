@@ -25,14 +25,26 @@ bool sortComparator(pll a, pll b) {
     return a.second < b.second;
 }
 
-void solve() {}
+void solve() {
+    ll n, p, k;
+    cin >> n >> p >> k;
+    ll pModValue = p % k;
+    ll modValue = 0;
+    ll ans = 0;
+    while (modValue < pModValue) {
+        ans += ceil((n - modValue) * 1.0 / (k * 1.0));
+        modValue++;
+    }
+    ans += ceil(((p + 1 - pModValue) * 1.0) / (k * 1.0));
+    cout << ans << endl;
+}
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

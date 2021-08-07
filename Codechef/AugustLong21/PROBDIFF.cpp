@@ -25,14 +25,33 @@ bool sortComparator(pll a, pll b) {
     return a.second < b.second;
 }
 
-void solve() {}
+void solve() {
+    int a1, a2, a3, a4;
+    cin >> a1 >> a2 >> a3 >> a4;
+    unordered_map<int, int> m;
+    m[a1]++;
+    m[a2]++;
+    m[a3]++;
+    m[a4]++;
+    int similar = 0;
+    for (auto data : m) {
+        if (data.second > 1) {
+            similar = data.second;
+            break;
+        }
+    }
+    if (similar == 0) cout << 2 << endl;
+    if (similar == 2) cout << 2 << endl;
+    if (similar == 3) cout << 1 << endl;
+    if (similar == 4) cout << 0 << endl;
+}
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }
