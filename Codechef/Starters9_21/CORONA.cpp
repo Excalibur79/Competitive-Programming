@@ -19,7 +19,7 @@ const ll INF = 1e18;
 #define printarr(arr, n) \
     for (ll i = 1; i < n; i++) cout << arr[i] << ' ';
 
-void dijkstra(auto &graph, auto &dist, auto &slots) {
+void dijkstra(auto graph, auto &dist, auto &slots) {
     priority_queue<pll, vector<pll>, greater<pll>> pq;
     for (auto candidate : slots) {
         ll index = candidate.second;
@@ -67,7 +67,8 @@ void solve() {
     }
     dijkstra(graph, dist, slots);
     for (int i = 1; i <= n; i++) cout << dist[i] << " ";
-    cout << "\n";
+    cout << endl;
+    dist = {};
 }
 
 int main() {
