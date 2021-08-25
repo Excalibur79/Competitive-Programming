@@ -23,47 +23,40 @@ ll mid;
 
 bool isPossible(auto &caves, ll health) {
     for (auto cave : caves) {
-        for (auto monsterHealth : cave) {
-            if (health > monsterHealth) {
-                health++;
-            } else
-                return false;
-        }
+        ll powerNeeded = cave.first;
+        ll bonusHealthAfterCave = cave.second;
+        if (health >= powerNeeded)
+            health += bonusHealthAfterCave;
+        else
+            return false;
     }
     return true;
-}
-
-bool comparator(auto cave1, auto cave2) {
-    if (cave1[0] > mid && cave2[0] > mid) return cave1.size() <= cave2.size();
-    return cave1[0] >= mid;
 }
 
 void solve() {
     ll n;
     cin >> n;
-    vector<vector<ll>> caves;
-    ll sum = 0;
+    vector<pll> caves;
+
     ll l = INT_MAX, h = INT_MIN;
     for (int i = 1; i <= n; i++) {
         ll k;
         cin >> k;
-        vector<ll> p;
-        while (k--) {
+        ll neededPowerForThisCave = -1;
+        for (int i = 0; i < k; i++) {
             ll x;
             cin >> x;
-            sum += x;
-            h = max(h, x + 1);
-            l = min(l, x + 1);
-            p.pb(x);
+            neededPowerForThisCave = max(neededPowerForThisCave, x - i + 1);
         }
-        caves.pb(p);
+        l = min(l, neededPowerForThisCave);
+        h = max(h, neededPowerForThisCave);
+        caves.pb(mp(neededPowerForThisCave, k));
     }
-
+    sort(caves.begin(), caves.end());
     // l = 0, h = INT_MAX;
     ll res = -1;
     while (l <= h) {
         mid = (l + h) / 2;
-        sort(caves.begin(), caves.end(), comparator);
         if (isPossible(caves, mid)) {
             res = mid;
             h = mid - 1;
@@ -72,14 +65,6 @@ void solve() {
         }
     }
     cout << res << endl;
-
-    cout << endl;
-    for (auto cave : caves) {
-        for (auto monsterHealth : cave) {
-            cout << monsterHealth << " ";
-        }
-        cout << endl;
-    }
 }
 
 int main() {
