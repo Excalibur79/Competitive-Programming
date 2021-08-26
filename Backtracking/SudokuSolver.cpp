@@ -30,10 +30,21 @@ bool canPlace(auto &sudoku, int number, int i, int j) {
     for (int row = 0; row < n; row++) {
         if (sudoku[row][j] == number) return false;
     }
+    //  checking subgrid
+
+    int x = (i / (int)sqrt(n)) * sqrt(n);
+    int y = (j / (int)sqrt(n)) * sqrt(n);
+    // cout << x << " " << y << endl;
+    for (int p = x; p < (x + sqrt(n)); p++) {
+        for (int q = y; q < (y + sqrt(n)); q++) {
+            if (sudoku[p][q] == number) return false;
+        }
+    }
+
     return true;
 }
 
-bool sudokuSolver(auto &sudoku, int row) {
+bool sudokuSolver(auto &sudoku, int row, int col) {
     if (row == n) {
         // print Sudoku
         cout << endl;
@@ -45,18 +56,19 @@ bool sudokuSolver(auto &sudoku, int row) {
         }
         return true;
     }
-    for (int j = 0; j < n; j++) {
-        if (sudoku[row][j] == 0) {
-            for (int number = 1; number <= n; number++) {
-                if (canPlace(sudoku, number, row, j)) {
-                    sudoku[row][j] = number;
-                    bool res = sudokuSolver(sudoku, row + 1);
-                    sudoku[row][j] = 0;
-                    if (res) true;
-                }
-            }
+    if (col == n)  // column er baire piuche geche so go to next row
+        return sudokuSolver(sudoku, row + 1, 0);
+    if (sudoku[row][col] != 0) return sudokuSolver(sudoku, row, col + 1);
+    // else place a valid number here
+    for (int number = 1; number <= n; number++) {
+        if (canPlace(sudoku, number, row, col)) {
+            sudoku[row][col] = number;
+            bool res = sudokuSolver(sudoku, row, col + 1);
+            sudoku[row][col] = 0;
+            if (res) return true;
         }
     }
+
     return false;
 }
 
@@ -69,7 +81,14 @@ void solve() {
         {1, 3, 0, 0, 0, 0, 2, 5, 0}, {0, 0, 0, 0, 0, 0, 0, 7, 4},
         {0, 0, 5, 2, 0, 6, 3, 0, 0}};
 
-    sudokuSolver(sudoku, 0);
+    // sudoku = {{5, 3, 0, 0, 7, 0, 0, 0, 0}, {6, 0, 0, 1, 9, 5, 0, 0, 0},
+    //           {0, 9, 8, 0, 0, 0, 0, 6, 0}, {8, 0, 0, 0, 6, 0, 0, 0, 3},
+    //           {4, 0, 0, 8, 0, 3, 0, 0, 1}, {7, 0, 0, 0, 2, 0, 0, 0, 6},
+    //           {0, 6, 0, 0, 0, 0, 2, 8, 0}, {0, 0, 0, 4, 1, 9, 0, 0, 5},
+    //           {0, 0, 0, 0, 8, 0, 0, 7, 9}};
+
+    bool res = sudokuSolver(sudoku, 0, 0);
+    if (!res) cout << "Puzzle Could'nt be solved!";
 }
 
 int main() {

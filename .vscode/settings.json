@@ -45,6 +45,7 @@
     "unordered_set": "cpp",
     "vector": "cpp",
     "regex": "cpp",
-    "valarray": "cpp"
+    "valarray": "cpp",
+    "complex": "cpp"
   }
 }
