@@ -19,41 +19,37 @@ const ll INF = 1e18;
 #define printarr(arr, n) \
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
+bool isPrime(int n) {
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
 void solve() {
     ll k;
-    string n;
-    cin >> k >> n;
-    ll length = n.size();
-    bool ansOne = false;
-    char ans;
-    bool breakNow = false;
-    for (char c : n) {
+    string s;
+    cin >> k >> s;
+    ll length = s.size();
+
+    for (char c : s) {
         if (c != '2' && c != '3' && c != '5' && c != '7') {
-            ansOne = true;
-            ans = c;
-            break;
+            cout << 1 << endl << c << endl;
+            return;
         }
     }
-    if (ansOne) {
-        cout << 1 << endl;
-        cout << ans << endl;
-    } else {
-        // sort(n.begin(), n.end());
-        for (int i = 0; i < length; i++) {
-            for (int j = i + 1; j < length; j++) {
-                string s;
-                s.pb(n[i]);
-                s.pb(n[j]);
-                if (s == "25" || s == "35" || s == "27" || s == "22" ||
-                    s == "55" || s == "77" || s == "33" || s == "52" ||
-                    s == "72" || s == "75") {
-                    cout << 2 << endl;
-                    cout << s << endl;
-                    breakNow = true;
-                    break;
-                }
+
+    // sort(n.begin(), n.end());
+    for (int i = 0; i < length; i++) {
+        for (int j = i + 1; j < length; j++) {
+            int n;
+            n = s[i] - '0';
+            n *= 10;
+            n += (s[j] - '0');
+            if (!isPrime(n)) {
+                cout << 2 << endl << n << endl;
+                return;
             }
-            if (breakNow) break;
         }
     }
 }
