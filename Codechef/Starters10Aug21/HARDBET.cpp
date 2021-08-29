@@ -34,29 +34,14 @@ string decimalToBinary(ll n, ll fix) {
 }
 
 void solve() {
-    int w, h, n;
-    cin >> w >> h >> n;
-    vector<int> hh;
-    hh.pb(0);
-    vector<int> ww;
-    ww.pb(0);
-    for (int i = 0; i < n; i++) {
-        int y;
-        int x;
-        cin >> y >> x;
-        hh.pb(x);
-        ww.pb(y);
-    }
-    hh.pb(h + 1);
-    ww.pb(w + 1);
-    sort(hh.begin(), hh.end());
-    sort(ww.begin(), ww.end());
-    int m = n = INT_MIN;
-    for (int i = 1; i < hh.size(); i++) {
-        m = max(m, hh[i] - hh[i - 1] - 1);
-        n = max(n, ww[i] - ww[i - 1] - 1);
-    }
-    cout << m * n << endl;
+    int a, b, c;
+    cin >> a >> b >> c;
+    if (c < b && c < a)
+        cout << "Alice" << endl;
+    else if (b < c && b < a)
+        cout << "Bob" << endl;
+    else
+        cout << "Draw" << endl;
 }
 
 int main() {
