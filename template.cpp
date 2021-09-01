@@ -6,6 +6,7 @@
 using namespace std;
 
 #define ll long long
+#define int long long int
 #define vi vector<int>
 #define vll vector<ll>
 #define pii pair<int, int>
@@ -21,7 +22,7 @@ const ll INF = 1e18;
 
 void solve() {}
 
-int main() {
+int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
