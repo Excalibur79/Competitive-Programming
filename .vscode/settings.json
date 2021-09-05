@@ -46,6 +46,7 @@
     "vector": "cpp",
     "regex": "cpp",
     "valarray": "cpp",
-    "complex": "cpp"
+    "complex": "cpp",
+    "numeric": "cpp"
   }
 }
