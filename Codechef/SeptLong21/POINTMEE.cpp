@@ -23,8 +23,8 @@ const ll INF = 1e18;
 int numberOfOperations(pii point, pii testPoint) {
     if (point == testPoint) return 0;
 
-    vi values = {point.first - testPoint.first,
-                 point.second - testPoint.second};
+    vi values = {point.first - testPoint.first, point.second - testPoint.second,
+                 testPoint.second - point.second};
     for (int k : values) {
         // checking k1
         if (testPoint.first + k == point.first &&
@@ -70,8 +70,9 @@ void solve() {
             pointAns = point;
         }
     }
-    cout << ans << " : (" << pointAns.first << "," << pointAns.second << ")"
-         << endl;
+    // cout << ans << " : (" << pointAns.first << "," << pointAns.second << ")"
+    //      << endl;
+    cout << ans << endl;
 }
 
 int32_t main() {
