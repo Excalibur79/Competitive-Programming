@@ -35,8 +35,10 @@ void takeInput(Node *node) {
     int data;
     cin >> data;
     cin >> left >> right;
-    Node newNode(data);
-    node = &newNode;
+    // Node newNode(data);
+    // node = &newNode;
+    Node *n = new Node(data);
+    node = n;
     if (left) takeInput(node->left);
     if (right) takeInput(node->right);
 }
