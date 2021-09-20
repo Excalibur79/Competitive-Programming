@@ -1,0 +1,66 @@
+// Author: Ankur Saha
+// Linkedin: https://www.linkedin.com/in/ankur-saha/
+// Github: https://github.com/Excalibur79
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define int long long int
+#define vi vector<int>
+#define vll vector<ll>
+#define pii pair<int, int>
+#define pll pair<ll, ll>
+#define pb push_back
+#define mp make_pair
+const int MOD = 1e9 + 7;
+const ll INF = 1e18;
+#define inputarr(arr, n) \
+    for (ll i = 0; i < n; i++) cin >> arr[i];
+#define printarr(arr, n) \
+    for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
+
+void solve() {
+    int n;
+    cin >> n;
+    int match = 0;
+
+    for (int test = 1; test <= n; test++) {
+        stack<char> brackets;
+        int strSize = 1;
+        int openBraces = 0;
+        ++match;
+        int totalSize = 2 * n;
+        while (strSize <= totalSize) {
+            if (brackets.size() < match && openBraces < n) {
+                brackets.push('(');
+                cout << brackets.top();
+                openBraces++;
+                strSize++;
+            } else if (brackets.size() == match) {
+                cout << ')';
+                brackets.pop();
+                strSize++;
+
+            } else if (openBraces == n) {
+                while (strSize <= 2 * n) {
+                    cout << ")";
+                    strSize++;
+                }
+            }
+        }
+        cout << endl;
+    }
+}
+
+int32_t main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int t = 1;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
