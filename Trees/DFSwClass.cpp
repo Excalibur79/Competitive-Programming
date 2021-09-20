@@ -31,16 +31,18 @@ class Node {
 };
 
 void takeInput(Node *node) {
-    bool left, right;
     int data;
-    cin >> data;
-    cin >> left >> right;
-    // Node newNode(data);
-    // node = &newNode;
-    Node *n = new Node(data);
-    node = n;
-    if (left) takeInput(node->left);
-    if (right) takeInput(node->right);
+    bool left, right;
+    cin >> data >> left >> right;
+    node->data = data;
+    if (left) {
+        node->left = new Node(-1);
+        takeInput(node->left);
+    }
+    if (right) {
+        node->right = new Node(-1);
+        takeInput(node->right);
+    }
 }
 
 void inOrder(Node *node) {
@@ -65,7 +67,7 @@ void postOrder(Node *node) {
 }
 
 void solve() {
-    Node *root;
+    Node *root = new Node(-1);
     takeInput(root);
     inOrder(root);
     cout << endl;
