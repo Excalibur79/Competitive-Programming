@@ -48,6 +48,8 @@
     "valarray": "cpp",
     "complex": "cpp",
     "numeric": "cpp",
-    "*.tcc": "cpp"
+    "*.tcc": "cpp",
+    "chrono": "cpp",
+    "random": "cpp"
   }
 }

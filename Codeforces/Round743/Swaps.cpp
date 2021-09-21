@@ -26,12 +26,24 @@ void solve() {
     vector<int> a(n), b(n);
     inputarr(a, n);
     inputarr(b, n);
+    int ans = INT_MAX;
+    map<int, int> checkA;
     for (int i = 0; i < n; i++) {
-        if (a[i] < b[0]) {
-            cout << i << endl;
-            break;
+        checkA[-a[i]] = i;
+    }
+    for (int i = 0; i < n; i++) {
+        int value = -b[i];
+        auto it = checkA.lower_bound(value);
+        while (it != checkA.end()) {
+            // cout << value << " " << b[i] << endl;
+            int index = it->second;
+            ans = min(ans, index + i);
+            value = it->first + 1;
+            checkA.erase(it);
+            it = checkA.lower_bound(value);
         }
     }
+    cout << ans << endl;
 }
 
 int32_t main() {
