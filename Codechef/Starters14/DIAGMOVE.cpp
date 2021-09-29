@@ -21,15 +21,12 @@ const ll INF = 1e18;
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
 void solve() {
-    int n;
-    cin >> n;
-    vi arr(n);
-    inputarr(arr, n);
-    list<int> l;
-    set<int> data;
-    for (int value : arr) {
-        auto it = data.lower_bound(value);
-    }
+    int x, y;
+    cin >> x >> y;
+    if ((x - y) % 2 == 0)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
 
 int32_t main() {
@@ -37,7 +34,7 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }
