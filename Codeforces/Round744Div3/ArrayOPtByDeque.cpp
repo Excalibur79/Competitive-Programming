@@ -23,13 +23,25 @@ const ll INF = 1e18;
 void solve() {
     int n;
     cin >> n;
-    vi arr(n);
+    multiset<int> dataPos;
+    multiset<int> dataNeg;
+    vector<int> arr(n);
     inputarr(arr, n);
-    list<int> l;
-    set<int> data;
-    for (int value : arr) {
-        auto it = data.lower_bound(value);
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+        int value = arr[i];
+        auto greaterIt = dataPos.upper_bound(value);
+        auto lowerIt = dataNeg.upper_bound(-value);
+        int numbersGreater = distance(greaterIt, dataPos.end());
+        int numbersLower = distance(lowerIt, dataNeg.end());
+
+        // cout << "For :" << value << " lower :" << numbersLower
+        //      << " greater :" << numbersGreater << endl;
+        ans += min(numbersLower, numbersGreater);
+        dataPos.insert(value);
+        dataNeg.insert(-value);
     }
+    cout << ans << endl;
 }
 
 int32_t main() {
@@ -37,7 +49,7 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }
