@@ -23,31 +23,39 @@ const ll INF = 1e18;
 void solve() {
     int n;
     cin >> n;
-    vi arr(n), newArr(n);
-    inputarr(arr, n);
-    sort(arr.begin(), arr.end());
-    int i = 0, j = n - 1;
-    newArr = arr;
-    int steps = 0;
-    while (i < j) {
-        for (int x = 0; x < arr[i]; x++) {
-            steps++;
-            arr[i]--;
-            arr[j]--;
+    set<pii> s, copyS;
+    for (int i = 1; i <= n; i++) {
+        int x;
+        cin >> x;
+        if (x > 0) {
+            s.insert(mp(x, i));
+            copyS.insert(mp(x, i));
         }
-        if (arr[i] == 0) i++;
-        if (arr[j] == 0) j--;
     }
-    cout << steps << endl;
-    i = 0, j = n - 1;
-    while (i < j) {
-        for (int x = 0; x < newArr[i]; x++) {
-            cout << i + 1 << " " << j + 1 << endl;
-            newArr[i]--;
-            newArr[j]--;
-        }
-        if (newArr[i] == 0) i++;
-        if (newArr[j] == 0) j--;
+    auto first = s.begin(), last = --s.end();
+    int counter = 0;
+    // for (auto value : s) cout << value.first << " ";
+    // cout << endl;
+    vector<pii> ans;
+    while (s.size() > 1) {
+        first = s.begin();
+        last = --s.end();
+        int low = first->first;
+        int high = last->first;
+        ans.pb(mp(first->second, last->second));
+        low--;
+        high--;
+        counter++;
+        if (low > 0) s.insert(mp(low, first->second));
+        if (high > 0) s.insert(mp(high, last->second));
+        s.erase(first);
+        s.erase(last);
+        // for (auto value : s) cout << value.first << " ";
+        // cout << endl;
+    }
+    cout << counter << endl;
+    for (auto value : ans) {
+        cout << value.first << " " << value.second << endl;
     }
 }
 
