@@ -23,27 +23,20 @@ const ll INF = 1e18;
 void solve() {
     int n;
     cin >> n;
-    vector<int> arr(n), arr2(n);
+    vector<int> arr(n);
     inputarr(arr, n);
-    arr2 = arr;
-    int steps = 0;
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (arr[j] > arr[j + 1]) {
-                swap(arr[j], arr[j + 1]);
-                steps++;
-            }
+    vector<pair<int, int>> res;
+    for (int i = n - 1; i >= 0; i--) {
+        int index = max_element(arr.begin(), arr.end()) - arr.begin();
+
+        if (index < i) {
+            res.pb(mp(index, i));
         }
+        arr.erase(arr.begin() + index);
     }
-    cout << steps << endl;
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (arr2[j] > arr2[j + 1]) {
-                swap(arr2[j], arr2[j + 1]);
-                cout << j + 1 << " " << j + 2 << " " << 1 << endl;
-            }
-        }
-    }
+    cout << res.size() << endl;
+    for (auto data : res)
+        cout << data.first + 1 << " " << data.second + 1 << " " << 1 << endl;
 }
 
 int32_t main() {
