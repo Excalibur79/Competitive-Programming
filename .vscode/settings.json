@@ -50,6 +50,7 @@
     "numeric": "cpp",
     "*.tcc": "cpp",
     "chrono": "cpp",
-    "random": "cpp"
+    "random": "cpp",
+    "types.h": "c"
   }
 }

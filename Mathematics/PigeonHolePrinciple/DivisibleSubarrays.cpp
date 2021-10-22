@@ -4,7 +4,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-#include <unistd.h>
+
 #define ll long long
 #define int long long int
 #define vi vector<int>
@@ -23,7 +23,24 @@ const ll INF = 1e18;
 void solve() {
     int n;
     cin >> n;
-    cout << n + n << endl;
+    vi arr(n);
+    unordered_map<int, int> hash;
+    hash[0] = 1;
+    inputarr(arr, n);
+    for (int i = 1; i < n; i++) {
+        arr[i] += arr[i - 1];
+    }
+    for (int i = 0; i < n; i++) {
+        arr[i] = arr[i] % n;
+        hash[arr[i]]++;
+    }
+    int ans = 0;
+    for (auto data : hash) {
+        if (data.second >= 2) {
+            ans += (data.second * (data.second - 1)) / 2;
+        }
+    }
+    cout << ans << endl;
 }
 
 int32_t main() {
@@ -31,7 +48,7 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

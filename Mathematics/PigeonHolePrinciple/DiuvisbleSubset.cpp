@@ -4,7 +4,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-#include <unistd.h>
+
 #define ll long long
 #define int long long int
 #define vi vector<int>
@@ -23,7 +23,8 @@ const ll INF = 1e18;
 void solve() {
     int n;
     cin >> n;
-    cout << n + n << endl;
+    vi arr(n);
+    inputarr(arr, n);
 }
 
 int32_t main() {
@@ -31,7 +32,7 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }
