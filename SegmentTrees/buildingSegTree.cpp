@@ -47,6 +47,25 @@ void update(auto &segTree, int ss, int se, int i, int increment, int index) {
     }
 }
 
+void updateRange(auto &segTree, int ss, int se, int l, int r, int increment,
+                 int index) {
+    // range update and given node range doesnt overlap
+    if (r < ss || l > se) {
+        return;
+    }
+    //
+    if (ss == se) {
+        segTree[index] += increment;
+        return;
+    } else {
+        int mid = (ss + se) / 2;
+        updateRange(segTree, ss, mid, l, r, increment, 2 * index);
+        updateRange(segTree, mid + 1, se, l, r, increment, 2 * index + 1);
+        segTree[index] = min(segTree[2 * index], segTree[2 * index + 1]);
+        return;
+    }
+}
+
 int query(auto &segTree, int ss, int se, int qs, int qe, int index) {
     // complete overlap
     if (ss >= qs && se <= qe) {
@@ -70,7 +89,7 @@ void solve() {
     // printarr(segTree, 4 * n + 1);
     int q;
     cin >> q;
-    update(segTree, 0, n - 1, 3, 10, 1);
+    updateRange(segTree, 0, n - 1, 3, 5, 10, 1);
     while (q--) {
         int l, r;
         cin >> l >> r;
