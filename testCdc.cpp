@@ -21,9 +21,43 @@ const ll INF = 1e18;
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
 void solve() {
-    int n;
-    cin >> n;
-    cout << n + n << endl;
+    string s;
+    cin >> s;
+    vi zeroes = {};
+    vi ones = {};
+    vector<vector<int>> ans = {};
+    if (s[0] == '0')
+        zeroes.pb(0);
+    else
+        ones.pb(1);
+    for (int i = 1; i < s.size(); i++) {
+        if (s[i] == s[i - 1]) {
+            if (s[i] == '0')
+                zeroes.pb(0);
+            else
+                ones.pb(1);
+        } else {
+            if (s[i - 1] == '0') {
+                ans.pb(zeroes);
+                zeroes = {};
+            } else {
+                ans.pb(ones);
+                ones = {};
+            }
+            if (s[i] == '0')
+                zeroes.pb(0);
+            else
+                ones.pb(1);
+        }
+    }
+    if (ones.size() > 1) ans.pb(ones);
+    if (zeroes.size() > 1) ans.pb(zeroes);
+    for (auto data : ans) {
+        for (auto value : data) {
+            cout << value << " ";
+        }
+        cout << endl;
+    }
 }
 
 int32_t main() {
