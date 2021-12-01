@@ -51,6 +51,19 @@
     "*.tcc": "cpp",
     "chrono": "cpp",
     "random": "cpp",
-    "types.h": "c"
+    "types.h": "c",
+    "atomic": "cpp",
+    "bitset": "cpp",
+    "condition_variable": "cpp",
+    "fstream": "cpp",
+    "functional": "cpp",
+    "future": "cpp",
+    "mutex": "cpp",
+    "ratio": "cpp",
+    "scoped_allocator": "cpp",
+    "shared_mutex": "cpp",
+    "sstream": "cpp",
+    "thread": "cpp",
+    "typeindex": "cpp"
   }
 }
