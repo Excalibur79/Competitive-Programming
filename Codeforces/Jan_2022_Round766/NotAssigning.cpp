@@ -22,14 +22,19 @@ const ll INF = 1e18;
 
 bool possible = true;
 
-int dfs(auto &graph, auto &visited, auto &color, int node, int nodeColor) {
-    visited[node] = true;
-    color[node] = nodeColor;
-    if (graph[node].size() == 2) {
-        int color1 =
+int dfs(auto &graph, auto &visited, auto &colors, int node, int edgeColor) {
+    if (graph[node].size() > 2)
+        possible = false;
+    else {
+        visited[node] = true;
+        for (auto neighbour : graph[node]) {
+            if (!visited[neighbour]) {
+                colors[mp(node, neighbour)] = edgeColor;
+                colors[mp(neighbour, node)] = edgeColor;
+                dfs(graph, visited, colors, neighbour, edgeColor == 2 ? 3 : 2);
+            }
+        }
     }
-
-    return nodeColor;
 }
 
 void solve() {
@@ -37,7 +42,9 @@ void solve() {
     cin >> n;
     unordered_map<int, vector<int>> graph;
     vector<bool> visited(n);
-    vector<int> color(n);
+    map<pii, int> colors;
+    vector<pii> edges;
+
     for (int i = 1; i < n; i++) {
         int u, v;
         cin >> u >> v;
@@ -45,8 +52,16 @@ void solve() {
         v--;
         graph[u].pb(v);
         graph[v].pb(u);
+        edges.pb(mp(u, v));
     }
-    dfs(graph, visited, color, 0, 2);
+    dfs(graph, visited, colors, 0, 2);
+    if (possible) {
+        for (auto data : edges) {
+            cout << colors[mp(data.first, data.second)] << " ";
+        }
+        cout << endl;
+    } else
+        cout << -1 << endl;
 }
 
 int32_t main() {
@@ -54,7 +69,7 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }
