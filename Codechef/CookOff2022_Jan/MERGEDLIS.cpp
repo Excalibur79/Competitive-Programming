@@ -20,33 +20,57 @@ const ll INF = 1e18;
 #define printarr(arr, n) \
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
-bool comp(vi &a, vi &b) {
-    if (a[2] == b[2])  // same type
-        return a[1] <= b[1];
-    else
-        return a[0] <= b[0];
+int LIS(vector<int> &arr) {
+    int n = arr.size();
+    if (n == 0) return 0;
+    multiset<int> s;
+    for (int data : arr) {
+        int largestVal = INT_MIN;
+        if (!s.empty()) largestVal = *(--s.end());
+        if (data >= largestVal)  // non decreasing hole >= hoye jabe
+            s.insert(data);
+        else {
+            auto removeIt = s.upper_bound(data);
+            s.erase(removeIt);
+            s.insert(data);
+        }
+    }
+    // for (int data : s) cout << data << " ";
+
+    return s.size();
 }
 
 void solve() {
     int n, m;
     cin >> n >> m;
-    vector<vector<int>> a;
-    vector<vector<int>> b;
-    vector<vector<int>> c;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        a.pb({x, i, 0});
-        c.pb({x, i, 0});
-    }
-    for (int i = 0; i < m; i++) {
-        int x;
-        cin >> x;
-        b.pb({x, i, 1});
-        c.pb({x, i, 1});
-    }
-    sort(c.begin(), c.end(), comp);
-    for (auto data : c) cout << data[0] << " ";
+    vector<int> a(n);
+    vector<int> b(m);
+    // vector<int> c;
+    inputarr(a, n);
+    inputarr(b, m);
+    // int i = 0, j = 0;
+    // while (i < n && j < m) {
+    //     if (a[i] < b[j]) {
+    //         c.pb(a[i]);
+    //         i++;
+    //     } else {
+    //         c.pb(b[j]);
+    //         j++;
+    //     }
+    // }
+    // while (i < n) {
+    //     c.pb(a[i]);
+    //     i++;
+    // }
+    // while (j < m) {
+    //     c.pb(b[j]);
+    //     j++;
+    // }
+    // for (int data : c) cout << data << " ";
+    // cout << endl;
+    // LIS(c);
+    // cout << endl;
+    cout << LIS(a) + LIS(b) << endl;
 }
 
 int32_t main() {
