@@ -21,19 +21,9 @@ const ll INF = 1e18;
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
 void solve() {
-    int n;
-    cin >> n;
-    bool zeroTaken = false;
-    vector<int> ans;
-    for (int i = n - 1; i >= 1; i--) {
-        ans.pb(i);
-        if (__builtin_popcount(i) == 1 && !zeroTaken) {
-            zeroTaken = true;
-            ans.pb(0);
-        }
-    }
-    printarr(ans, n);
-    cout << endl;
+    int a, b, c;
+    cin >> b >> c;
+    cout << c / __gcd(b, c) << endl;
 }
 
 int32_t main() {

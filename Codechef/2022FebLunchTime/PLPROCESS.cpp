@@ -23,17 +23,19 @@ const ll INF = 1e18;
 void solve() {
     int n;
     cin >> n;
-    bool zeroTaken = false;
-    vector<int> ans;
-    for (int i = n - 1; i >= 1; i--) {
-        ans.pb(i);
-        if (__builtin_popcount(i) == 1 && !zeroTaken) {
-            zeroTaken = true;
-            ans.pb(0);
-        }
+    vi arr(n);
+    inputarr(arr, n);
+
+    for (int i = 1; i < n; i++) arr[i] += arr[i - 1];
+    int ans = arr[n - 1];
+    // cout << 0 << " " << ans << endl;
+    for (int i = 0; i < n - 1; i++) {
+        int left = arr[i];
+        int right = arr[n - 1] - left;
+        //  cout << left << " " << right << endl;
+        ans = min(ans, max(left, right));
     }
-    printarr(ans, n);
-    cout << endl;
+    cout << ans << endl;
 }
 
 int32_t main() {

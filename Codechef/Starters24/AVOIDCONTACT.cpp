@@ -6,7 +6,7 @@
 using namespace std;
 
 #define ll long long
-#define int long long int
+// #define int long long int
 #define vi vector<int>
 #define vll vector<ll>
 #define pii pair<int, int>
@@ -21,19 +21,18 @@ const ll INF = 1e18;
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
 void solve() {
-    int n;
-    cin >> n;
-    bool zeroTaken = false;
-    vector<int> ans;
-    for (int i = n - 1; i >= 1; i--) {
-        ans.pb(i);
-        if (__builtin_popcount(i) == 1 && !zeroTaken) {
-            zeroTaken = true;
-            ans.pb(0);
-        }
-    }
-    printarr(ans, n);
-    cout << endl;
+    int x, y;
+    cin >> x >> y;
+    int healthy = x - y;
+    int affected = y;
+    int numberOfRooms = 0;
+    if (healthy == 0)
+        numberOfRooms = 2 * affected - 1;
+    else if (affected == 0)
+        numberOfRooms = healthy;
+    else
+        numberOfRooms = 2 * affected + healthy;
+    cout << numberOfRooms << endl;
 }
 
 int32_t main() {

@@ -21,19 +21,16 @@ const ll INF = 1e18;
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
 void solve() {
-    int n;
-    cin >> n;
-    bool zeroTaken = false;
-    vector<int> ans;
-    for (int i = n - 1; i >= 1; i--) {
-        ans.pb(i);
-        if (__builtin_popcount(i) == 1 && !zeroTaken) {
-            zeroTaken = true;
-            ans.pb(0);
-        }
+    string s;
+    cin >> s;
+    int ans = s.size() - 1;
+    int i = 0, j = s.size() - 1;
+    while (i <= j) {
+        if (s[i] == s[j]) ans--;
+        i++;
+        j--;
     }
-    printarr(ans, n);
-    cout << endl;
+    cout << ans << endl;
 }
 
 int32_t main() {

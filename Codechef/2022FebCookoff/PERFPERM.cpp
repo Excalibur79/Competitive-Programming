@@ -21,18 +21,26 @@ const ll INF = 1e18;
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
 void solve() {
-    int n;
-    cin >> n;
-    bool zeroTaken = false;
-    vector<int> ans;
-    for (int i = n - 1; i >= 1; i--) {
-        ans.pb(i);
-        if (__builtin_popcount(i) == 1 && !zeroTaken) {
-            zeroTaken = true;
-            ans.pb(0);
+    int n, k;
+    cin >> n >> k;
+    vi arr;
+    for (int i = 0; i <= n; i++) arr.pb(i);
+    reverse(arr.begin() + k + 1, arr.end());
+    if ((n - k) % 2 != 0) {
+        int mid = ((k + 1 + n) / 2);
+        swap(arr[mid], arr[mid + 1]);
+    }
+    // if (arr[k + 1] % (k + 1) == 0) {
+    //     swap(arr[k + 1], arr[k + 2]);
+    // }
+    for (int i = 1 + k; i < n; i++) {
+        if (arr[i] % i == 0) {
+            swap(arr[i], arr[i + 1]);
+            i++;
         }
     }
-    printarr(ans, n);
+
+    for (int i = 1; i <= n; i++) cout << arr[i] << " ";
     cout << endl;
 }
 

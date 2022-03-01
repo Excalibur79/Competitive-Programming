@@ -23,17 +23,11 @@ const ll INF = 1e18;
 void solve() {
     int n;
     cin >> n;
-    bool zeroTaken = false;
-    vector<int> ans;
-    for (int i = n - 1; i >= 1; i--) {
-        ans.pb(i);
-        if (__builtin_popcount(i) == 1 && !zeroTaken) {
-            zeroTaken = true;
-            ans.pb(0);
-        }
-    }
-    printarr(ans, n);
-    cout << endl;
+    vi arr(n);
+    inputarr(arr, n);
+    vector<char> poles(n);
+    inputarr(poles, n);
+    vi
 }
 
 int32_t main() {

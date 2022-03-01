@@ -6,7 +6,7 @@
 using namespace std;
 
 #define ll long long
-#define int long long int
+// #define int long long int
 #define vi vector<int>
 #define vll vector<ll>
 #define pii pair<int, int>
@@ -20,19 +20,37 @@ const ll INF = 1e18;
 #define printarr(arr, n) \
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
+string getString(char x) {
+    string s(1, x);
+    return s;
+}
+
 void solve() {
     int n;
-    cin >> n;
-    bool zeroTaken = false;
-    vector<int> ans;
-    for (int i = n - 1; i >= 1; i--) {
-        ans.pb(i);
-        if (__builtin_popcount(i) == 1 && !zeroTaken) {
-            zeroTaken = true;
-            ans.pb(0);
+    string s;
+    cin >> n >> s;
+    if (n % 2 != 0) {
+        cout << "NO" << endl;
+        return;
+    }
+    map<char, int> hash;
+    for (char c : s) {
+        hash[c]++;
+        if (hash[c] > n / 2) {
+            cout << "NO" << endl;
+            return;
         }
     }
-    printarr(ans, n);
+    cout << "YES" << endl;
+    char ans[n];
+    int k = 0;
+    for (auto data : hash) {
+        for (int i = 0; i < data.second; i++) {
+            ans[k++] = data.first;
+        }
+    }
+    reverse(ans, ans + n / 2);
+    for (char data : ans) cout << data;
     cout << endl;
 }
 

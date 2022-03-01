@@ -1,0 +1,1 @@
+ // midString = data.first + midString + upper->first;
