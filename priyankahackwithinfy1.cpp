@@ -20,35 +20,14 @@ const ll INF = 1e18;
 #define printarr(arr, n) \
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
-void solve() {
-    int n;
-    cin >> n;
-    vi arr(n);
-    inputarr(arr, n);
-    vector<char> poles(n);
-    inputarr(poles, n);
-    int numberOfNs = 0;
-    for (char pole : poles) {
-        if (pole == 'N') numberOfNs++;
-    }
-    if (is_sorted(arr.begin(), arr.end()))
-        cout << 0 << endl;
-    else if (numberOfNs == 0 | numberOfNs == n)
-        cout << -1 << endl;
-    else {
-        if (poles[0] != poles[n - 1])
-            cout << 1 << endl;
-        else
-            cout << 2 << endl;
-    }
-}
+void solve() { cout <<  << endl; }
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

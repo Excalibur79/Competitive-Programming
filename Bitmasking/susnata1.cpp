@@ -21,26 +21,32 @@ const ll INF = 1e18;
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
 void solve() {
-    int n;
-    cin >> n;
-    vi arr(n);
-    inputarr(arr, n);
-    vector<char> poles(n);
-    inputarr(poles, n);
-    int numberOfNs = 0;
-    for (char pole : poles) {
-        if (pole == 'N') numberOfNs++;
+    string s1, s2;
+    cin >> s1 >> s2;
+    unordered_map<char, int> m;
+    for (char c : s1) m[c]++;
+    for (char c : s2) m[c]++;
+    int i = s1.length() - 1;
+    int j = 0;
+    int steps = 0;
+    while (m['0'] != m['1']) {
+        if (m['1'] > m['0']) {
+            if (s1[i] == '1')
+                i--;
+            else if (s2[j] == '1')
+                j++;
+            m['1']--;
+        } else {
+            if (s1[i] == '0')
+                i--;
+            else if (s2[j] == '0')
+                j++;
+            m['0']--;
+        }
+        steps++;
     }
-    if (is_sorted(arr.begin(), arr.end()))
-        cout << 0 << endl;
-    else if (numberOfNs == 0 | numberOfNs == n)
-        cout << -1 << endl;
-    else {
-        if (poles[0] != poles[n - 1])
-            cout << 1 << endl;
-        else
-            cout << 2 << endl;
-    }
+    cout << i << " " << j << endl;
+    cout << steps << endl;
 }
 
 int32_t main() {
@@ -48,7 +54,7 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

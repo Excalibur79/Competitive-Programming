@@ -21,26 +21,32 @@ const ll INF = 1e18;
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
 void solve() {
-    int n;
+    int n, x;
     cin >> n;
-    vi arr(n);
-    inputarr(arr, n);
-    vector<char> poles(n);
-    inputarr(poles, n);
-    int numberOfNs = 0;
-    for (char pole : poles) {
-        if (pole == 'N') numberOfNs++;
+    vector<int> arr(n);
+    multiset<int> arrSet;
+    for (int i = 0; i < n; i++) {
+        int l;
+        cin >> l;
+        arr[i] = l;
+        arrSet.insert(l);
     }
-    if (is_sorted(arr.begin(), arr.end()))
-        cout << 0 << endl;
-    else if (numberOfNs == 0 | numberOfNs == n)
-        cout << -1 << endl;
-    else {
-        if (poles[0] != poles[n - 1])
-            cout << 1 << endl;
-        else
-            cout << 2 << endl;
+    cin >> x;
+    int ans = 0;
+    while (!arrSet.empty()) {
+        int data = *arrSet.begin();
+        if (arrSet.find(data ^ x) != arrSet.end()) {
+            auto it1 = arrSet.find(data);
+            auto it2 = arrSet.find(data ^ x);
+            arrSet.erase(it1);
+            arrSet.erase(it2);
+        } else {
+            ans++;
+            auto it1 = arrSet.find(data);
+            arrSet.erase(it1);
+        }
     }
+    cout << ans << endl;
 }
 
 int32_t main() {
@@ -48,7 +54,7 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

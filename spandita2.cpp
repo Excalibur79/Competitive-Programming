@@ -21,26 +21,28 @@ const ll INF = 1e18;
     for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
 
 void solve() {
-    int n;
-    cin >> n;
-    vi arr(n);
-    inputarr(arr, n);
-    vector<char> poles(n);
-    inputarr(poles, n);
-    int numberOfNs = 0;
-    for (char pole : poles) {
-        if (pole == 'N') numberOfNs++;
+    int n, k;
+    cin >> n >> k;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    
+    vector<vector<int,int,int>> pArr;
+
+    int val = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (k == 0) break;
+        if (arr[i] == val)
+            continue;
+        else {
+            arr[i] = val;
+            k--;
+        }
     }
-    if (is_sorted(arr.begin(), arr.end()))
-        cout << 0 << endl;
-    else if (numberOfNs == 0 | numberOfNs == n)
-        cout << -1 << endl;
-    else {
-        if (poles[0] != poles[n - 1])
-            cout << 1 << endl;
-        else
-            cout << 2 << endl;
-    }
+    unordered_set<int> arrSet;
+    for (int data : arr) arrSet.insert(data);
+    for (int data : arr) cout << data << " ";
+    cout << endl;
+    cout << arrSet.size() << endl;
 }
 
 int32_t main() {
@@ -48,7 +50,7 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }
