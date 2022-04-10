@@ -15,7 +15,11 @@ ll binaryToDecimal(string s) {
 
 int main() {
     string n;
-    cin >> n;
-    cout << binaryToDecimal(n) << endl;
+    // cin >> n;
+    //  cout << binaryToDecimal(n) << endl;
+
+    multiset<int> ms;
+    for (int i = 1; i < 4; i++) ms.insert(i);
+    cout << *(ms.begin() + 1) << endl;
     return 0;
 }
