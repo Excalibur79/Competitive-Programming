@@ -15,6 +15,7 @@ using namespace std;
 #define mp make_pair
 const int MOD = 1e9 + 7;
 const ll INF = 1e18;
+const ll eps = 1e-6;
 #define inputarr(arr, n) \
     for (ll i = 0; i < n; i++) cin >> arr[i];
 #define printarr(arr, n) \
