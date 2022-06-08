@@ -24,6 +24,22 @@ void preorder(Node* root) {
     }
 }
 
+void inorder(Node* root) {
+    stack<Node*> st;
+    Node* node = root;
+    while (true) {
+        if (node) {
+            st.push(node);
+            node = node->left;
+        } else {
+            Node* topNode = st.top();
+            st.pop();
+            cout << topNode->data << " ";
+            node = topNode->right;
+        }
+    }
+}
+
 int main() {
     Node* root = new Node(1);
     root->left = new Node(2);
@@ -32,6 +48,8 @@ int main() {
     root->left->right = new Node(4);
     root->left->right->left = new Node(5);
     root->left->right->right = new Node(6);
-    preorder(root);
+    // preorder(root);
+    // cout << "\n";
+    inorder(root);
     return 0;
 }
