@@ -1,46 +1,84 @@
-// Author: Ankur Saha
-// Linkedin: https://www.linkedin.com/in/ankur-saha/
-// Github: https://github.com/Excalibur79
-
+/*
+______________
+----------------------------------------
+ Author    :  Niharika Dutta
+ Code Link :
+ Time Complexity :
+______________
+----------------------------------------
+ */
 #include <bits/stdc++.h>
+
+#include <iostream>
+
 using namespace std;
 
 #define ll long long
-#define int long long int
+#define lli long long int
 #define vi vector<int>
 #define vll vector<ll>
-#define pii pair<int, int>
-#define pll pair<ll, ll>
 #define pb push_back
 #define mp make_pair
-const int MOD = 1e9 + 7;
-const ll INF = 1e18;
-#define inputarr(arr, n) \
-    for (ll i = 0; i < n; i++) cin >> arr[i];
-#define printarr(arr, n) \
-    for (ll i = 0; i < n; i++) cout << arr[i] << ' ';
+#define loop1(n) for (ll i = 0; i < (n); i++)
+#define loop2(n) for (ll i = 1; i <= (n); i++)
+#define test  \
+    ll t;     \
+    cin >> t; \
+    while (t--)
 
-int recur(string &a, string &b, int n, int m) {
-    if (n == 0 || m == 0) return 0;
-    if (a[n - 1] == b[m - 1]) return 1 + recur(a, b, n - 1, m - 1);
-    return recur(a, b, n - 1, m) + recur(a, b, n, m - 1);
-}
+//  METHOD - I
+//  Using HashMapp   O(n)
+string Method_1(string &str, int len) {
+    unordered_map<char, int> map;
+    int k = 0;
 
-void solve() {
-    string a, b;
-    cin >> a >> b;
-    int ans = recur(a, b, a.size(), b.size());
-    cout << ans << endl;
-}
-
-int32_t main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int t = 1;
-    // cin >> t;
-    while (t--) {
-        solve();
+    for (int i = 0; i < len; i++) {
+        if (map[str[i]] == 0)  //  If not present in the Map then Insert.
+        {
+            map[str[i]]++;
+            str[k++] = str[i];
+        } else if (map[str[i]] > 0) {
+            int x = str.find(str[i]);
+            //  erase ( idx,  len )
+            if (x != str.length()) str.erase(x, 1);  // delete char @ position
+            i--;
+            // cout << str << endl;
+        }
     }
+    cout << "sdasd" << str << endl;
+
+    return str;
+    // return str.erase(k, len - k);
+}
+
+//  METHOD - II
+//  Using Set   O(n)
+string Method_2(string &str, int len) {
+    unordered_set<char> s;
+
+    for (auto it : str) s.insert(it);
+
+    int i = 0;
+    for (auto val : s) str[i++] = val;
+
+    return str.erase(i, len - i);
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    string str = "geeksforgeeks";
+    int len = str.length();
+    string str1;
+    string data = Method_1(str, len);
+
+    // str1 = Method_1(str, len);
+    // str1 = Method_2(str, len);
+
+    cout << "\nAfter removing duplication from the String  ==>  " << str
+         << "\n\n";
+
     return 0;
 }
