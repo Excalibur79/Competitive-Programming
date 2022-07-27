@@ -64,6 +64,7 @@ void printMaxOfMin(int arr[], int n) {
 
     // Print the result
     for (int i = 1; i <= n; i++) cout << ans[i] << " ";
+    cout << endl;
 }
 
 // Driver program

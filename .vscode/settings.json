@@ -64,6 +64,23 @@
     "shared_mutex": "cpp",
     "sstream": "cpp",
     "thread": "cpp",
-    "typeindex": "cpp"
+    "typeindex": "cpp",
+    "cctype": "cpp",
+    "cfenv": "cpp",
+    "cinttypes": "cpp",
+    "clocale": "cpp",
+    "codecvt": "cpp",
+    "csetjmp": "cpp",
+    "csignal": "cpp",
+    "cstdarg": "cpp",
+    "ctime": "cpp",
+    "cuchar": "cpp",
+    "cwctype": "cpp",
+    "algorithm": "cpp",
+    "iterator": "cpp",
+    "map": "cpp",
+    "memory_resource": "cpp",
+    "set": "cpp",
+    "iomanip": "cpp"
   }
 }

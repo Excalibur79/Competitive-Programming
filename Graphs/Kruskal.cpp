@@ -48,7 +48,7 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         int u, v, wt;
-        cin >> u >> v >> wt;
+        cin >> wt >> u >> v;
         node newNode(u, v, wt);
         edges.push_back(newNode);
     }
